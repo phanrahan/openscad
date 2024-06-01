@@ -1,0 +1,6 @@
+f='coral4'
+echo $f
+
+vpype read $f.svg write $f.flat.svg
+python svg2pts.py $f.flat.svg $f.pts
+

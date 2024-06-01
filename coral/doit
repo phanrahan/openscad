@@ -1,0 +1,10 @@
+f='coral4'
+echo $f
+
+vpype read $f.svg write $f.flat.svg
+python svg2pts.py $f.flat.svg $f.pts
+
+mv $f.pts coral.pts
+openscad -o $f.stl coral.scad
+
+slic3r --load  Ender3_V5.bottom.ini --print-center 105,105 $f.stl
