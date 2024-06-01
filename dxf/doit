@@ -1,0 +1,5 @@
+f='coral'
+echo $f.svg
+vpype read $f.svg write $f.flat.svg
+inkscape --export-file=$f.eps $f.flat.svg
+pstoedit -dt -f dxf:-polyaslines\ -mm $f.eps $f.dxf
