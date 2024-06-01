@@ -1,0 +1,1 @@
+slic3r --load  Ender3_Vase.ini --print-center 105,105 sweep.stl
