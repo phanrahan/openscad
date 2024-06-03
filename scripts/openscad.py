@@ -11,8 +11,8 @@ def flatten(l):
 def zipD(params):
     return flatten([["-D", param] for param in params]) 
 
-def run(scad, params, stl):
-    Ds = zipD(defines(params))
+def run(scad, stl, **kwargs):
+    Ds = zipD(defines(kwargs))
     subprocess.run([openscad, scad] + Ds + ["-o", stl])
 
 
