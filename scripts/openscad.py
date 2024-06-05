@@ -19,7 +19,9 @@ def zipD(params):
 
 def run(scad, stl, **kwargs):
     Ds = zipD(defines(kwargs))
-    subprocess.run([openscad, scad] + Ds + ["-o", stl])
+    cmd = [openscad, scad] + Ds + ["-o", stl]
+    print(" ".join(cmd))
+    subprocess.run(cmd)
 
 
 
