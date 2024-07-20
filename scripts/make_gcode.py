@@ -2,7 +2,7 @@ import sys
 import glob
 import prusaslicer
 
-config_base = 'config_spiral'
+config_base = 'config'
 filament="pla"
 model="mk4"
 config = ".".join([config_base, filament, model, "ini"])
