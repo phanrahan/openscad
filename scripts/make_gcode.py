@@ -1,14 +1,22 @@
+import sys
 import glob
 import prusaslicer
 
-filament=pla
-printer=mk4
+config_base = 'config_spiral'
+filament="pla"
+model="mk4"
+config = ".".join([config_base, filament, model, "ini"])
 
-for s in glob.glob("*.stl"):
-    base, suffix = files.split(".")
+gcode_suffix = "bgcode" if model == 'mk4' else "gcode"
+
+for file in glob.glob("*.stl"):
+    base = file.removesuffix(".stl")
     stl = base + ".stl"
-    gcode = ".".join([base, filament, model])
-    config = ".".join(["config", filament, model, "ini"])
+    gcode = ".".join([base, filament, model, gcode_suffix])
+    print(file,stl,gcode,config)
     prusaslicer.run(stl, gcode, config)
 
+sys.exit(1)
+
+# In prusaslicer File -> Gcode Preview ...
 
