@@ -2,11 +2,16 @@ import subprocess
 
 prusa='/Applications/PrusaSlicer.app/Contents/MacOS/PrusaSlicer'
 
-def run(stl, gcode, config):
+def runcmd(filename, cmd):
+    cmd = [prusa] + cmd + [filename]
+    print(cmd)
+    subprocess.run(cmd)
+
+def run(filename, gcode, config):
     cmd = [prusa, "--center", "125,105", "--export-gcode", "--loglevel", "0"] + \
           ["--load", config] + \
           ["--output", gcode] + \
-          [stl] 
+          [filename] 
     print(cmd)
     subprocess.run(cmd)
 
