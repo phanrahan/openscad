@@ -1,9 +1,11 @@
 import subprocess
 
-prusa='/Applications/PrusaSlicer.app/Contents/MacOS/PrusaSlicer'
+prusa='/Applications/Original Prusa Drivers/PrusaSlicer.app/Contents/MacOS/PrusaSlicer'
 
-def runcmd(filename, cmd):
-    cmd = [prusa] + cmd + [filename]
+def runcmd(cmd,filenames):
+    if not isinstance(filenames, list):
+        filenames = [filenames]
+    cmd = [prusa] + cmd + filenames
     print(cmd)
     subprocess.run(cmd)
 
