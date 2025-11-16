@@ -6,6 +6,8 @@ def string(param):
     s = str(param)
     if type(param) == str: 
         s = f"\"{s}\""
+    elif type(param) == bool:
+        s = "true" if param else "false"
     return s
 
 def defines(params):
