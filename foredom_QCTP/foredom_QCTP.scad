@@ -1,12 +1,23 @@
+include <BOSL2/std.scad>
+
 $fn = 60;
 
+D = 26;
+L = 75;
+THICK=4;
+SLOT = 1;
+
+bracket = union(circle(d=D+2*THICK), right(D/2+THICK-2, p=square([10,13], anchor=LEFT)));
+
+//i = round_corners(bracket, r=1,$fn=12);
+//echo(bracket);
+
+o = offset(bracket, r=2);
+i = offset(o, r=-2);
+
+linear_extrude(L)
     difference() {
-        union() {
-            cylinder(d=25+8, h=75);
-            translate([(25+8+6)/2,0,75/2])
-                cube([15,12,75],center=true);
-         }
-        cylinder(d=25, h=75);
-        translate([(25+8)/2,0,75/2]) 
-            cube([24,2,75],center=true);
+        polygon(i);
+        circle(d=D);
+        square([2*D,SLOT], anchor=LEFT);
     }
