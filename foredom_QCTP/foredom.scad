@@ -1,16 +1,16 @@
 include <BOSL2/std.scad>
 
-BUILD = "6mm";
-
 $fn = 60;
 IN = 25.4;
+
+BUILD = "6mm";
 
 D = IN;
 L = 75;
 THICK=6;
 SLOT = 0.8;
 
-bracket = union(circle(d=D+2*THICK), right(D/2+THICK-2, p=square([10,13], anchor=LEFT)));
+bracket = union(circle(d=D+2*THICK), right(D/2+THICK-2, p=square([12,13], anchor=LEFT)));
 
 //i = round_corners(bracket, r=1,$fn=12);
 //echo(bracket);
@@ -33,7 +33,7 @@ module handpiece_3mm() {
 module handpiece_6mm() {
     union() {
         cylinder(h=L, d=D);
-        up(L-1.00*IN) {
+        up(L-0.625*IN) {
             up(0.125*IN) cylinder(h=IN, d=1.25*IN);
             cylinder(h= 0.125*IN, d1=1.00*IN, d2=1.25*IN);
         }
@@ -42,10 +42,10 @@ module handpiece_6mm() {
 
 difference() {
      qctp();
-     if (BUILD == "6mm") 
-        handpiece_6mm();
+     if( BUILD=="3mm")
+         handpiece_3mm();
      else
-        handpiece_3mm();
+         handpiece_6mm();
 }
 /*
 intersection() {
