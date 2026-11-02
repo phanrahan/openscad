@@ -1,5 +1,7 @@
 include <BOSL2/std.scad>
 
+BUILD = "6mm";
+
 $fn = 60;
 IN = 25.4;
 
@@ -16,19 +18,37 @@ bracket = union(circle(d=D+2*THICK), right(D/2+THICK-2, p=square([10,13], anchor
 o = offset(bracket, r=2);
 i = offset(o, r=-2);
 
-//intersection() {
+module qctp() {
+    difference() {
+        linear_extrude(L)
+            polygon(i);
+        cube([2*D,SLOT,L], anchor=LEFT+BOTTOM);
+    }
+}
+
+module handpiece_3mm() {
+    cylinder(h=L, d=D);
+}
+
+module handpiece_6mm() {
+    union() {
+        cylinder(h=L, d=D);
+        up(L-1.00*IN) {
+            up(0.125*IN) cylinder(h=IN, d=1.25*IN);
+            cylinder(h= 0.125*IN, d1=1.00*IN, d2=1.25*IN);
+        }
+    }
+}
+
 difference() {
-    linear_extrude(L)
-        polygon(i);
-     cylinder(h=L, d=D);
-     up(L-1.00*IN) 
-         union() {
-             up(0.125*IN) cylinder(h=IN, d=1.25*IN);
-             cylinder(h= 0.125*IN, d1=1.00*IN, d2=1.25*IN);
-         }
-     cube([2*D,SLOT,L], anchor=LEFT+BOTTOM);
+     qctp();
+     if (BUILD == "6mm") 
+        handpiece_6mm();
+     else
+        handpiece_3mm();
 }
 /*
-cube([100,100,100], align=BOTTOM+FRONT);
+intersection() {
+   cube([100,100,100], align=BOTTOM+FRONT);
 }
 */
